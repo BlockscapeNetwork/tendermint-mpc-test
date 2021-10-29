@@ -1,5 +1,5 @@
 signer/bin
 validator/bin
-signer/config/shares/1
-signer/config/shares/2
-signer/config/shares/3
+signer/config/shares/1/*
+signer/config/shares/2/*
+signer/config/shares/3/*
