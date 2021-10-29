@@ -1,0 +1,103 @@
+version: "3.9"
+services:
+  signer1:
+    image: signer:v0.0.1
+    ports:
+      - "30001:1234"
+    tty: true
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.3
+    environment:
+      - SIGNER=1
+      - CHAINID=uni
+      - cosigner_threshold=2
+      - cosigner_listen_address=tcp://0.0.0.0:1234
+      - COSIGNERID1=2
+      - COSIGNER1REMOTEADDR=tcp://192.168.10.4:1234
+      - COSIGNERID2=3
+      - COSIGNER2REMOTEADDR=tcp://192.168.10.5:1234
+      - VALIDATOR1=tcp://192.168.10.6:1234
+      - VALIDATOR2=tcp://192.168.10.7:1234
+      - OVERWRITE=1
+  signer2:
+    image: signer:v0.0.1
+    ports:
+      - "30002:1234"
+    tty: true
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.4
+    environment:
+      - SIGNER=2
+      - CHAINID=uni
+      - cosigner_threshold=2
+      - cosigner_listen_address=tcp://0.0.0.0:1234
+      - COSIGNERID1=1
+      - COSIGNER1REMOTEADDR=tcp://192.168.10.3:1234
+      - COSIGNERID2=3
+      - COSIGNER2REMOTEADDR=tcp://192.168.10.5:1234
+      - VALIDATOR1=tcp://192.168.10.6:1234
+      - VALIDATOR2=tcp://192.168.10.7:1234
+      - OVERWRITE=1
+  signer3:
+    image: signer:v0.0.1
+    ports:
+      - "30003:1234"
+    tty: true
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.5
+    environment:
+      - SIGNER=3
+      - CHAINID=uni
+      - cosigner_threshold=2
+      - cosigner_listen_address=tcp://0.0.0.0:1234
+      - COSIGNERID1=1
+      - COSIGNER1REMOTEADDR=tcp://192.168.10.3:1234
+      - COSIGNERID2=2
+      - COSIGNER2REMOTEADDR=tcp://192.168.10.4:1234
+      - VALIDATOR1=tcp://192.168.10.6:1234
+      - VALIDATOR2=tcp://192.168.10.7:1234
+      - OVERWRITE=1
+  validator1:
+    image: validator:v0.0.1
+    ports:
+      - "30056:26656"
+      - "30057:26657"
+      - "31234:1234"
+    tty: true
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.6
+    environment:
+      - PRIVPORT=1234
+      - PERSISTENTPEERS=fcb871e3cb04cb73473c1ee032a9dcbcc07c1e7a@192.168.10.7:26656,b2ef97b03c049c39a975b7845abe40fb3e48ee36@216.238.71.243:26656
+      - NODEKEYJSON={"priv_key":{"type":"tendermint/PrivKeyEd25519","value":"U6miIPmiQHdqYtwxGbWooFOFXctGq2ukIUTICAvHdGsgJ85Tqkcbz3nuee3wVxm7T83WJYl5ZzuLKCT2O/aYmQ=="}}
+      - OVERWRITE=0
+    volumes:
+      - ~/.juno:/data/config
+  validator2:
+    image: validator:v0.0.1
+    ports:
+      - "30156:26656"
+      - "30157:26657"
+      - "31235:1234"
+    tty: true
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.7
+    environment:
+      - PRIVPORT=1234
+      - PERSISTENTPEERS=bc1909ad9b5f1f08a5d9506ee9376d27672721de@192.168.10.6:26656,b2ef97b03c049c39a975b7845abe40fb3e48ee36@216.238.71.243:26656
+      - NODEKEYJSON={"priv_key":{"type":"tendermint/PrivKeyEd25519","value":"Mq/dSSvjINaGixSeAqPZfdK1z4sTyiaMyvDRQqPJj3F8osokJ+iAixNRXGedi882gfnnqwRnAU0EEpxHaeWUuw=="}}
+      - OVERWRITE=0
+    volumes:
+      - ~/.juno2:/data/config
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/16
