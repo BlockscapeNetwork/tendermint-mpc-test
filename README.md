@@ -85,7 +85,7 @@ in this project dir:
 `docker run --env-file envsigner.list signer:v0.0.1`
 
 
-## Things to know
+## Important information
 
 docker-compose file tries to attach your lokal ~/.juno and ~/.juno2 (second val) folder to start at synced blocked height (you should store this chaindata there)
 
