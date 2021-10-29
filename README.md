@@ -121,12 +121,17 @@ val2: curl localhost:30157/status
 
 in project dir.
 
-docker-compose stop signer1 (or other signer: ex. signer2, signer3)
+`docker-compose stop signer1` (or other signer: ex. signer2, signer3)
 
-in this test case:
+in this test case I stopped signer1:
 
 signer3 throws error:
 
 `GetEphemeralSecretPart req error` and the two remaing signer do not sign (partly) blocks.
 
 Expected behaviour: 100% signing
+
+
+## if you need to create val
+
+junod tx staking create-validator --amount 1000000ujunox --node tcp://localhost:30057 --keyring-backend test --chain-id uni --fees 500ujunox --from Wallet --node-id bc1909ad9b5f1f08a5d9506ee9376d27672721de --moniker test-bl --pubkey '{"@type":"/cosmos.crypto.ed25519.PubKey","key":"\<key\>"}' --commission-max-change-rate 0.01 --commission-max-rate 0.3999 --commission-rate 0.0999 --min-self-delegation 1
