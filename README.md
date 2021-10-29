@@ -68,7 +68,7 @@ in this project dir:
 
 ## Create shares
 
-`key2shares --total 3 --threshold 2 validator/config/config/priv_validator_key.json (or other location of priv_validator_key.json)`
+`key2shares --total 3 --threshold 2 priv_validator_key.json (or other location of priv_validator_key.json)`
 
 rename private_share_1.json to share.json and copy to <this-project-dir/signer/config/shares/1/share.json>
 rename private_share_2.json to share.json and copy to <this-project-dir/signer/config/shares/2/share.json>
@@ -91,7 +91,7 @@ docker-compose file tries to attach your lokal ~/.juno and ~/.juno2 (second val)
 
 to create ~/.juno2 with chain data. You can copy ~/.juno files to ~/.juno2 `cp -R ~/.juno ~/.juno2` (please stop your local daemon before copy)
 
-if you want to use data in validator image for ~/.juno and ~/.juno2 set OVERWRITE=1 for both validators in docker-compose.yml. (pay attention. this overwrites data in ~/.juno and .juno2 with the data in validator/config (docker image) and starts syncing at around Block 0)
+if you want to use data in validator image for ~/.juno and ~/.juno2 set OVERWRITE=1 for both validators in docker-compose.yml. (pay attention. this overwrites data in ~/.juno and ~/.juno2 with the data in validator/config (docker image) and starts syncing around Block 0)
 
 ### Start docker-compose
 
@@ -121,20 +121,21 @@ val1:`curl localhost:30057/status`
 val2:`curl localhost:30157/status`
 
 
-## Check current signer logs for =SIGNED_MSG_TYPE_PRECOMMIT
+## Check current signer logs for =SIGNED_MSG_TYPE_
 
 in project dir.
 
 `docker-compose stop signer1` (or other signer: ex. signer2, signer3)
 
-in this test case I stopped signer1:
+in this test case I stopped signer1 with "=SIGNED_MSG_TYPE_" logs:
 
 signer3 throws error:
 
-`GetEphemeralSecretPart req error` and the two remaing signer do not sign (partly) blocks.
+`GetEphemeralSecretPart req error` and the two remaining signer shows some weird behavior where some blocks are signed and some not.
 
 Expected behaviour: 100% signing
 
+Ticket here: `https://gitlab.com/unit410/tendermint-validator/-/issues/2`
 
 ## if you need to create val
 
