@@ -33,7 +33,7 @@ go mod tidy
 env GOOS=linux GOARCH=amd64 make build
 ```
 
-copy binary to this Repository <project-dir>/signer/bin
+copy binary to this Repository \<project-dir>/signer/bin
 
 example:
 
