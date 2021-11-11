@@ -19,7 +19,7 @@ services:
       - COSIGNER2REMOTEADDR=tcp://192.168.10.5:1234
       - VALIDATOR1=tcp://192.168.10.6:1234
       - VALIDATOR2=tcp://192.168.10.7:1234
-      - VALIDATOR3=tcp://192.168.10.8:123
+      - VALIDATOR3=tcp://192.168.10.8:1234
       - OVERWRITE=1
   cosigner2:
     image: cosigner:v0.0.1
@@ -40,7 +40,7 @@ services:
       - COSIGNER2REMOTEADDR=tcp://192.168.10.5:1234
       - VALIDATOR1=tcp://192.168.10.6:1234
       - VALIDATOR2=tcp://192.168.10.7:1234
-      - VALIDATOR3=tcp://192.168.10.8:123
+      - VALIDATOR3=tcp://192.168.10.8:1234
       - OVERWRITE=1
   cosigner3:
     image: cosigner:v0.0.1
@@ -61,7 +61,7 @@ services:
       - COSIGNER2REMOTEADDR=tcp://192.168.10.4:1234
       - VALIDATOR1=tcp://192.168.10.6:1234
       - VALIDATOR2=tcp://192.168.10.7:1234
-      - VALIDATOR3=tcp://192.168.10.8:123
+      - VALIDATOR3=tcp://192.168.10.8:1234
       - OVERWRITE=1
   cosigner-relay-node1:
     image: cosigner-relay-node:v0.0.1
