@@ -38,3 +38,6 @@ address = "tcp://<node-a ip>:1234"
 
 [[node]]
 address = "tcp://<node-b ip>:1234"
+
+[[node]]
+address = "tcp://<node-c ip>:1234"

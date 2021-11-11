@@ -32,6 +32,7 @@ sed -i 's/id = y/id = '${COSIGNERID2}'/' config.toml
 sed -E -i 's+remote_address = "tcp://3.3.3.3:1234"+remote_address = \"'${COSIGNER2REMOTEADDR}'\"+' config.toml
 sed -E -i 's+address = "tcp://<node-a ip>:1234"+address = \"'${VALIDATOR1}'\"+' config.toml
 sed -E -i 's+address = "tcp://<node-b ip>:1234"+address = \"'${VALIDATOR2}'\"+' config.toml
+sed -E -i 's+address = "tcp://<node-c ip>:1234"+address = \"'${VALIDATOR3}'\"+' config.toml
 
 #check if priv_validator_state.json exists
 FILE=/data/${CHAINID}_share_sign_state.json
